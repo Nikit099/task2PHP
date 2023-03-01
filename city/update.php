@@ -15,14 +15,16 @@ $db = $database->getConnection();
 
 $city = new City($db);
 
-$data = json_decode(file_get_contents("php://input"));
-
-$city->id = $data->id;
-
-$city->name = $data->name;
 
 
+if (
+    !empty($_POST['id']) &&
+    !empty($_POST['name']) 
+) {
 
+    $city->id  = $_POST['id'];
+    $city->name = $_POST['name'];
+  
     if ($city->update()) {
 
         http_response_code(201);
@@ -32,3 +34,8 @@ $city->name = $data->name;
 
         echo json_encode(["message" => "Невозможно обновить город."]);
     }
+}else{
+    http_response_code(400);
+
+    echo json_encode(["message" => "Невозможно обновить город. Данные неполные."]);
+}

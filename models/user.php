@@ -61,7 +61,7 @@ class User
 
     $query = "UPDATE
             " . $this->table_name . "
-        SET name = :name, username = :username, idCity = :idCity,
+        SET name = :name, username = :username, idCity = :idCity
         WHERE id = :id";
 
     $stmt = $this->conn->prepare($query);

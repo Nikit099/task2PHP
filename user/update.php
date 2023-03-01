@@ -23,6 +23,11 @@ $user->name = $data->name;
 $user->username = $data->username;
 $user->idCity = $data->idCity;
 
+if (
+    !empty($_POST['username']) &&
+    !empty($_POST['idCity']) &&
+    !empty($_POST['name']) 
+) {
 
     if ($user->update()) {
 
@@ -33,3 +38,4 @@ $user->idCity = $data->idCity;
 
         echo json_encode(["message" => "Невозможно обновить пользователя."]);
     }
+}

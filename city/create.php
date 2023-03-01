@@ -12,7 +12,7 @@ $db = $database->getConnection();
 
 $city = new City($db);
 
-echo $_POST['name'];
+
 
 if (
     !empty($_POST['name']) 

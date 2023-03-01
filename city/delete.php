@@ -14,10 +14,13 @@ $db = $database->getConnection();
 
 $city = new City($db);
 
-$data = json_decode(file_get_contents("php://input"));
 
-$city->id = $data->id;
 
+
+
+$city->id = $_POST['id'];
+
+echo $city->id;
 
     if ($city->delete()) {
 

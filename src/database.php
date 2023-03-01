@@ -3,14 +3,19 @@
 
 require '../vendor/autoload.php';
 
-
+// $dotenv = new \Dotenv\Dotenv(dirname(__DIR__));
+// $dotenv->load();
 class Database
 {
-
     private string $host = 'localhost';
     private string $db_name = 'schemaa';
     private string $username = 'root';
     private string $password = 'qwerty123';
+
+    // private string $host = $_ENV ['MYSQL_HOST'];
+    // private string $db_name = $_ENV ['DATABASE_NAME'];
+    // private string $username = $_ENV ['MYSQL_USER'];
+    // private string $password = $_ENV ['MYSQL_PASSWORD'];
 
     public ?PDO $conn = null;
 
@@ -20,11 +25,8 @@ class Database
         try {
             $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
             $this->conn->exec("set names utf8");
-            $statement = $this->conn->query('SELECT * FROM names');
-            while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-                echo $row['id'] . ' ' . $row['name']. ' '. $row['username'].' '. $row['idCity'];
-            }
- 
+            echo $_ENV['MYSQL_HOST'];
+            
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }

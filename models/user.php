@@ -59,16 +59,14 @@ class User
     function update(): bool
 {
 
-    $query = "UPDATE
-            " . $this->table_name . "
-        SET name = :name, username = :username, idCity = :idCity
-        WHERE id = :id";
+    $query = "UPDATE " . $this->table_name . " SET name = :name, username = :username, idCity = :idCity WHERE id = :id";
 
     $stmt = $this->conn->prepare($query);
 
     $this->name = htmlspecialchars(strip_tags($this->name));
-    $this->price = htmlspecialchars(strip_tags($this->username));
-    $this->description = htmlspecialchars(strip_tags($this->idCity));
+    $this->username = htmlspecialchars(strip_tags($this->username));
+    $this->idCity = htmlspecialchars(strip_tags($this->idCity));
+    $this->id = htmlspecialchars(strip_tags($this->id));
 
     $stmt->bindParam(":name", $this->name);
     $stmt->bindParam(":username", $this->username);
@@ -84,13 +82,14 @@ class User
 
 function delete(): bool
 {
-    $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+    $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
 
     $stmt = $this->conn->prepare($query);
 
     $this->id = htmlspecialchars(strip_tags($this->id));
 
-    $stmt->bindParam(1, $this->id);
+
+    $stmt->bindParam(":id", $this->id);
 
     if ($stmt->execute()) {
         return true;

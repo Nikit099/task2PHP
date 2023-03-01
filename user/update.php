@@ -15,19 +15,18 @@ $db = $database->getConnection();
 
 $user = new User($db);
 
-$data = json_decode(file_get_contents("php://input"));
 
-$user->id = $data->id;
-
-$user->name = $data->name;
-$user->username = $data->username;
-$user->idCity = $data->idCity;
 
 if (
     !empty($_POST['username']) &&
+    !empty($_POST['id']) &&
     !empty($_POST['idCity']) &&
     !empty($_POST['name']) 
 ) {
+    $user->id = $_POST['id'];
+    $user->name = $_POST['name'];
+    $user->username = $_POST['username'];
+    $user->idCity = $_POST['idCity'];
 
     if ($user->update()) {
 

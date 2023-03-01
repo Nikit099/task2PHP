@@ -14,9 +14,8 @@ $db = $database->getConnection();
 
 $user = new User($db);
 
-$data = json_decode(file_get_contents("php://input"));
+$city->id = $_POST['id'];
 
-$user->id = $data->id;
 
 
     if ($user->delete()) {

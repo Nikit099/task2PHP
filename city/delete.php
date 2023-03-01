@@ -20,7 +20,7 @@ $city = new City($db);
 
 $city->id = $_POST['id'];
 
-echo $city->id;
+
 
     if ($city->delete()) {
 
